@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
 from typing import List
-
+from fastapi.middleware.cors import CORSMiddleware
 # Kendi oluşturduğumuz modülleri import ediyoruz
 from . import crud, models, schemas
 from .database import SessionLocal, engine
@@ -13,6 +13,18 @@ app = FastAPI(
     title="Film Veritabanı API",
     description="Kaggle'daki 'The Movies Dataset' kullanılarak oluşturulmuş bir film sorgulama API'si.",
     version="1.0.0"
+)
+# CORS ayarları
+origins = [
+    "*"  # Herkese izin ver (geliştirme için)
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 # Dependency: Her istek için bir veritabanı oturumu oluşturur ve istek bitince kapatır.
@@ -50,5 +62,25 @@ def search_movies(q: str, db: Session = Depends(get_db)):
     if not movies:
         # Arama sonucu boşsa 404 hatası da verilebilir veya boş bir liste de döndürülebilir.
         # Boş liste döndürmek genellikle daha yaygındır.
+        return []
+    return movies
+
+@app.get("/movies/genre/{genre_name}", response_model=List[schemas.Movie])
+def read_movies_by_genre(genre_name: str, db: Session = Depends(get_db)):
+    """
+    Belirli bir türe ait filmleri listeler.
+    """
+    movies = crud.get_movies_by_genre(db=db, genre_name=genre_name)
+    if not movies:
+        return []
+    return movies
+
+@app.get("/movies/actor/{actor_name}", response_model=List[schemas.Movie])
+def read_movies_by_actor(actor_name: str, db: Session = Depends(get_db)):
+    """
+    Belirli bir aktörün rol aldığı filmleri listeler.
+    """
+    movies = crud.get_movies_by_actor(db=db, actor_name=actor_name)
+    if not movies:
         return []
     return movies

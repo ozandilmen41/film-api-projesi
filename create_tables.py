@@ -1,5 +1,5 @@
 from src.database import engine, Base # Veritabanı bağlantısı ve Base objesini import ediyoruz
-from src.models import Movie # Oluşturduğumuz Movie modelini import ediyoruz
+from src.models import Movie, Genre # Oluşturduğumuz modelleri import ediyoruz
 
 def main(): 
     print("Tablolar oluşturuluyor...")
