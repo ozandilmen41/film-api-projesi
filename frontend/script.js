@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const API_URL = 'https://film-api-projesi.onrender.com';
+    
 
     // DOM Elementleri
     const searchInput = document.getElementById('searchInput');
@@ -24,17 +25,20 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Yardımcı Fonksiyonlar ---
 
     const createMovieCard = (movie) => {
-        const movieCard = document.createElement('div');
-        movieCard.className = 'movie-card';
-        movieCard.dataset.movieId = movie.id;
+    const movieCard = document.createElement('div');
+    movieCard.className = 'movie-card';
+    movieCard.dataset.movieId = movie.id;
 
-        movieCard.innerHTML = `
-            <div class="movie-info">
-                <h3>${movie.title}</h3>
-                <p>⭐ ${movie.vote_average.toFixed(1)}</p>
-            </div>
-        `;
-        return movieCard;
+    // DÜZELTME: movie.vote_average'ın null olup olmadığını kontrol et
+    const rating = movie.vote_average ? movie.vote_average.toFixed(1) : 'N/A';
+
+    movieCard.innerHTML = `
+        <div class="movie-info">
+            <h3>${movie.title}</h3>
+            <p>⭐ ${rating}</p>
+        </div>
+    `;
+    return movieCard;
     };
 
     const displayMovies = (movies, gridElement, message = 'Sonuç bulunamadı.') => {
