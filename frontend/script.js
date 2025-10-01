@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const API_URL = 'https://film-api-projesi.onrender.com/'; // FastAPI sunucunuzun adresi
+    const API_URL = 'https://film-api-projesi.onrender.com'; // FastAPI sunucunuzun adresi
 
     const searchInput = document.getElementById('searchInput');
     const searchButton = document.getElementById('searchButton');
