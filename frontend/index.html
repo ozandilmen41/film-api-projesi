@@ -3,26 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Film Arama Motoru</title>
+    <title>Film Platformu</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <header>
-        <h1>Film Arama Motoru</h1>
+        <h1>Film Platformu</h1>
         <div class="search-container">
             <input type="text" id="searchInput" placeholder="Film adıyla ara...">
             <button id="searchButton">Ara</button>
         </div>
     </header>
 
-    <main id="resultsGrid" class="results-grid"></main>
+    <main id="mainContent" class="container">
+        <!-- Kategori Navigasyonu -->
+        <nav id="categoryNav" class="movie-section">
+            <h2>Kategoriler</h2>
+            <ul id="categoryList">
+                <!-- Kategoriler JS ile dinamik olarak eklenecek -->
+            </ul>
+        </nav>
+
+        <!-- Arama Sonuçları (Başlangıçta Gizli) -->
+        <section id="searchResults" class="movie-section">
+            <h2 id="searchResultsTitle">Arama Sonuçları</h2>
+            <div id="searchResultsGrid" class="movie-grid"></div>
+        </section>
+
+        <!-- Seçilen Kategori İçeriği -->
+        <section id="contentDisplay" class="movie-section">
+            <h2 id="contentTitle">Lütfen bir kategori seçin</h2>
+            <div id="contentGrid" class="movie-grid">
+                <!-- Filmler buraya yüklenecek -->
+            </div>
+        </section>
+    </main>
 
     <div id="movieModal" class="modal">
         <div class="modal-content">
             <span class="close-button">&times;</span>
-            <div id="modalBody">
-                </div>
+            <div id="modalBody"></div>
         </div>
     </div>
 

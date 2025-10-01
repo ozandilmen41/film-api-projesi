@@ -2,6 +2,8 @@ from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
 from typing import List
 from fastapi.middleware.cors import CORSMiddleware
+from urllib.parse import unquote # URL kod çözümü için import ekliyoruz
+
 # Kendi oluşturduğumuz modülleri import ediyoruz
 from . import crud, models, schemas
 from .database import SessionLocal, engine
@@ -68,9 +70,10 @@ def search_movies(q: str, db: Session = Depends(get_db)):
 @app.get("/movies/genre/{genre_name}", response_model=List[schemas.Movie])
 def read_movies_by_genre(genre_name: str, db: Session = Depends(get_db)):
     """
-    Belirli bir türe ait filmleri listeler.
+    Belirtilen türe ait en yüksek puanlı 10 filmi listeler.
     """
-    movies = crud.get_movies_by_genre(db=db, genre_name=genre_name)
+    decoded_genre_name = unquote(genre_name)
+    movies = crud.get_movies_by_genre(db=db, genre_name=decoded_genre_name)
     if not movies:
         return []
     return movies
@@ -83,4 +86,21 @@ def read_movies_by_actor(actor_name: str, db: Session = Depends(get_db)):
     movies = crud.get_movies_by_actor(db=db, actor_name=actor_name)
     if not movies:
         return []
+    return movies
+
+@app.get("/genres/", response_model=List[schemas.Genre])
+def read_all_genres(db: Session = Depends(get_db)):
+    """
+    Veritabanındaki tüm film türlerini listeler.
+    """
+    genres = crud.get_all_genres(db=db)
+    return genres
+
+@app.get("/movies/top_rated/", response_model=List[schemas.Movie])
+def read_top_rated_movies(limit: int = 100, db: Session = Depends(get_db)):
+    """
+    En yüksek puanlı filmleri listeler.
+    'limit' parametresi ile kaç film getirileceği belirlenebilir. Varsayılan: 100.
+    """
+    movies = crud.get_top_rated_movies(db=db, limit=limit)
     return movies

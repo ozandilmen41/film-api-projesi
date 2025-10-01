@@ -29,7 +29,7 @@ class Movie(Base):
     budget = Column(Float, nullable=True) # Bütçe bazen bilinmeyebilir
     revenue = Column(Float, nullable=True) # Gelir bazen bilinmeyebilir
     popularity = Column(Float, nullable=True) # Popülerlik bazen bilinmeyebilir
-    vote_average = Column(Float, nullable=True) # Ortalama oy bazen bilinmeyebilir
+    vote_average = Column(Float, index=True, nullable=True) # Ortalama oy bazen bilinmeyebilir
     vote_count = Column(Integer, nullable=True) # Oy sayısı bazen bilinmeyebilir
     
     # Genre ilişkisini tanımlıyoruz
