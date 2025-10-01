@@ -4,7 +4,7 @@
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.95.2-green.svg)](https://fastapi.tiangolo.com/)
 [![AWS](https://img.shields.io/badge/AWS-RDS-orange.svg)](https://aws.amazon.com/rds/)
 
-Bu proje, Kaggle'dan alınan "The Movies Dataset" kullanılarak geliştirilmiş, AWS RDS (PostgreSQL) üzerinde çalışan, yüksek performanslı bir RESTful API'dir. Proje, büyük veri setlerini işleme, bulut tabanlı bir veritabanı yönetme ve modern backend teknolojileriyle ölçeklenebilir bir servis sunma yetkinliklerini sergilemek amacıyla oluşturulmuştur.
+
 
 ---
 
@@ -48,6 +48,22 @@ Aşağıda projenin sunduğu temel API endpoint'leri listelenmiştir:
 | `GET` | `/movies/search/`         | Başlığında aranan kelimeyi içeren filmleri listeler. | `/movies/search/?q=Matrix`                 |
 
 ---
+
+
+### 📥 Gerekli Veri Seti
+
+Bu projenin çalışması için "The Movies Dataset" gereklidir. Veri seti, reponun boyutunu küçük tutmak amacıyla versiyon kontrolüne dahil edilmemiştir.
+
+1.  Veri setini [Kaggle'dan indirin](https://www.kaggle.com/datasets/rounakbanik/the-movies-dataset).
+2.  İndirdiğiniz `.zip` dosyasından çıkan `movies_metadata.csv` dosyasını projenin ana dizinine kopyalayın.
+3.  Veriyi veritabanına yüklemek için `load_data.py` script'ini çalıştırın:
+    ```bash
+    python load_data.py
+    ```
+
+---
+
+
 
 ### 🔧 Kurulum ve Çalıştırma
 
