@@ -22,11 +22,14 @@ def search_movies_by_title(db: Session, query: str, skip: int = 0, limit: int = 
     # .offset(skip).limit(limit) -> Sayfalama (pagination) için kullanılır.
     return db.query(models.Movie).filter(models.Movie.title.ilike(f"%{query}%")).offset(skip).limit(limit).all()
 
+# Düzeltilmiş Kod
 def get_movies_by_genre(db: Session, genre_name: str, limit: int = 10):
     """
     Belirli bir türe ait en yüksek puanlı filmleri sorgular.
     """
-    return db.query(models.Movie).join(models.Movie.genres).filter(models.Genre.name.ilike(f"%{genre_name}%")).order_by(models.Movie.vote_average.desc()).limit(limit).all()
+    # DEĞİŞİKLİK: .ilike(f"%{genre_name}%") yerine .ilike(genre_name) kullanarak
+    # birebir eşleşme (büyük/küçük harf duyarsız) sağlıyoruz.
+    return db.query(models.Movie).join(models.Movie.genres).filter(models.Genre.name.ilike(genre_name)).order_by(models.Movie.vote_average.desc()).limit(limit).all()
 
 def get_movies_by_actor(db: Session, actor_name: str, skip: int = 0, limit: int = 100):
     """
