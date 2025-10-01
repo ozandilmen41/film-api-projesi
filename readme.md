@@ -71,7 +71,7 @@ Projeyi lokal makinenizde çalıştırmak için aşağıdaki adımları izleyin:
 
 1.  **Repository'yi klonlayın:**
     ```bash
-    git clone [SENİN GITHUB REPO LİNKİN]
+    git clone https://github.com/ozandilmen41/film-api-projesi
     cd film-api-projesi
     ```
 
