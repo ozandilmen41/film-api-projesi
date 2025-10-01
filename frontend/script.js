@@ -88,7 +88,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 movies = await response.json();
             } else if (categoryType === 'genre') {
                 title = `${categoryName} Filmleri`;
-                const response = await fetch(`${API_URL}/movies/genre/${categoryName}`);
+                // Kategori adını URL'de güvenli bir şekilde kullanmak için kodluyoruz.
+                const encodedCategoryName = encodeURIComponent(categoryName);
+                const response = await fetch(`${API_URL}/movies/genre/${encodedCategoryName}`);
                 if (!response.ok) throw new Error(`${categoryName} filmleri alınamadı.`);
                 movies = await response.json();
             }

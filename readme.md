@@ -91,7 +91,7 @@ Projeyi lokal makinenizde çalıştırmak için aşağıdaki adımları izleyin:
 
 ### 🌟 Gelecek Geliştirmeleri
 
-- [ ] **Frontend Arayüzü:** Projeyi daha görsel ve interaktif hale getirmek için basit bir React veya Vue.js arayüzü eklenmesi.
-- [ ] **Gelişmiş İlişkiler:** `genres`, `actors`, `keywords` gibi tabloların eklenerek filmlerle ilişkilendirilmesi.
-- [ ] **Gelişmiş Filtreleme:** Yıla, puana veya türe göre filtreleme yapabilen endpoint'lerin eklenmesi.
-- [ ] **Deployment:** API'nin Render veya Heroku gibi ücretsiz bir servise deploy edilerek canlıya alınması.
+- [✅] **Frontend Arayüzü:** Projeyi daha görsel ve interaktif hale getirmek için basit bir React veya Vue.js arayüzü eklenmesi.
+- [✅] **Gelişmiş İlişkiler:** `genres`, `actors`, `keywords` gibi tabloların eklenerek filmlerle ilişkilendirilmesi.
+- [✅] **Gelişmiş Filtreleme:** Yıla, puana veya türe göre filtreleme yapabilen endpoint'lerin eklenmesi.
+- [✅] **Deployment:** API'nin Render veya Heroku gibi ücretsiz bir servise deploy edilerek canlıya alınması.
