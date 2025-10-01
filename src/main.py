@@ -72,8 +72,8 @@ def read_movies_by_genre(genre_name: str, db: Session = Depends(get_db)):
     """
     Belirtilen türe ait en yüksek puanlı 10 filmi listeler.
     """
-    decoded_genre_name = unquote(genre_name)
-    movies = crud.get_movies_by_genre(db=db, genre_name=decoded_genre_name)
+    # FastAPI'nin otomatik URL kod çözümüne güveniyoruz.
+    movies = crud.get_movies_by_genre(db=db, genre_name=genre_name)
     if not movies:
         return []
     return movies
