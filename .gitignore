@@ -1,0 +1,10 @@
+# Virtual Environment
+venv/
+__pycache__/
+*.pyc
+
+# Environment variables
+.env
+# Veri dosyalarını ve büyük dosyaları hariç tut
+*.csv
+*.zip
