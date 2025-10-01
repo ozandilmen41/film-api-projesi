@@ -1,26 +1,28 @@
-# Film Sorgulama API'si (MovieLens API)
+# Film Sorgulama API'si ve Arayüzü
+
+### 🚀 **[CANLI ARAYÜZÜ DENEMEK İÇİN TIKLA!](https://film-api-proje.netlify.app/)** 🚀
 
 [![Python](https://img.shields.io/badge/Python-3.10-blue.svg)](https://www.python.org/downloads/release/python-310/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.95.2-green.svg)](https://fastapi.tiangolo.com/)
 [![AWS](https://img.shields.io/badge/AWS-RDS-orange.svg)](https://aws.amazon.com/rds/)
 
-
+Bu proje, Kaggle'dan alınan "The Movies Dataset" kullanılarak geliştirilmiş, **canlı bir arayüze sahip**, AWS RDS (PostgreSQL) üzerinde çalışan, yüksek performanslı bir RESTful API'dir. Proje, büyük veri setlerini işleme, bulut tabanlı bir veritabanı yönetme, modern backend teknolojileriyle ölçeklenebilir bir servis sunma ve bu servisi bir frontend uygulamasıyla entegre etme yetkinliklerini sergilemek amacıyla oluşturulmuştur.
 
 ---
 
 ### 🚀 Temel Özellikler
 
-- **Bulut Tabanlı Veritabanı:** Tüm veriler, AWS RDS üzerinde çalışan bir PostgreSQL veritabanında güvenli bir şekilde saklanmaktadır.
-- **Yüksek Performanslı API:** Modern ve asenkron bir framework olan FastAPI kullanılarak geliştirilmiştir.
-- **Dinamik Arama:** Film başlıklarında büyük/küçük harfe duyarsız, esnek arama yapabilme.
-- **Veri İşleme (ETL):** 45.000'den fazla satırlık kirli CSV verisinin Pandas ile temizlenmesi, dönüştürülmesi ve veritabanına yüklenmesi.
+- **Canlı ve İnteraktif Arayüz:** Netlify üzerinde yayınlanan, herkesin kullanabileceği bir web arayüzü.
+- **Bulut Tabanlı Backend:** Render üzerinde 7/24 çalışan, Python & FastAPI ile geliştirilmiş API.
+- **Yönetilen Veritabanı:** Tüm veriler, AWS RDS üzerinde çalışan bir PostgreSQL veritabanında güvenli bir şekilde saklanmaktadır.
+- **Veri İşleme (ETL):** 250.000'den fazla satırlık kirli CSV verisinin Pandas ile temizlenmesi, dönüştürülmesi ve veritabanına yüklenmesi.
 - **Otomatik Dokümantasyon:** FastAPI'nin sunduğu Swagger UI ile interaktif ve her zaman güncel API dokümantasyonu.
 
 ---
 
 ### 🏛️ Sistem Mimarisi
 
-Bu projenin mimarisi, modern bulut uygulamalarının temel prensiplerini yansıtmaktadır. Kullanıcıdan gelen bir HTTP isteği, API sunucusuna ulaşır, sunucu bu isteği işleyerek AWS RDS'teki veritabanına bir sorgu gönderir ve dönen sonucu kullanıcıya JSON formatında sunar.
+Bu projenin mimarisi, modern bir full-stack uygulamanın dağıtık yapısını göstermektedir. Kullanıcının web tarayıcısı Netlify'da barındırılan frontend uygulamasına erişir. Arayüzde yapılan bir arama, Render üzerinde çalışan backend API'sine bir HTTP isteği gönderir. API, bu isteği işleyerek AWS RDS'teki veritabanına bir sorgu atar ve dönen sonucu kullanıcıya sunar.
 
 ![Sistem Mimarisi](architecture.png)
 
@@ -28,41 +30,30 @@ Bu projenin mimarisi, modern bulut uygulamalarının temel prensiplerini yansıt
 
 ### 🛠️ Kullanılan Teknolojiler
 
+- **Frontend:** HTML5, CSS3, JavaScript (Vanilla JS)
 - **Backend:** Python, FastAPI
 - **Veritabanı:** PostgreSQL
-- **Bulut Servisi (Cloud):** AWS RDS
+- **Bulut Servisleri (Cloud):**
+    - **Arayüz Hostingi:** Netlify
+    - **API Hostingi:** Render
+    - **Veritabanı Hostingi:** AWS RDS
 - **Veri İşleme:** Pandas
-- **ORM (Object-Relational Mapper):** SQLAlchemy
-- **API Sunucusu:** Uvicorn
+- **ORM:** SQLAlchemy
 
 ---
 
 ### 📖 API Endpoint'leri
 
-Aşağıda projenin sunduğu temel API endpoint'leri listelenmiştir:
+API'nin canlı dokümantasyonuna **[https://film-api-projesi.onrender.com//docs]** adresinden ulaşılabilir.
 
-| Metot | Endpoint                  | Açıklama                                      | Örnek                                      |
-| :---- | :------------------------ | :-------------------------------------------- | :----------------------------------------- |
-| `GET` | `/`                       | API'nin çalıştığını teyit eden hoşgeldin mesajı. | `/`                                        |
-| `GET` | `/movies/{movie_id}`      | Verilen ID'ye sahip filmin detaylarını getirir. | `/movies/862`                              |
-| `GET` | `/movies/search/`         | Başlığında aranan kelimeyi içeren filmleri listeler. | `/movies/search/?q=Matrix`                 |
-
----
-
-
-### 📥 Gerekli Veri Seti
-
-Bu projenin çalışması için "The Movies Dataset" gereklidir. Veri seti, reponun boyutunu küçük tutmak amacıyla versiyon kontrolüne dahil edilmemiştir.
-
-1.  Veri setini [Kaggle'dan indirin](https://www.kaggle.com/datasets/rounakbanik/the-movies-dataset).
-2.  İndirdiğiniz `.zip` dosyasından çıkan `movies_metadata.csv` dosyasını projenin ana dizinine kopyalayın.
-3.  Veriyi veritabanına yüklemek için `load_data.py` script'ini çalıştırın:
-    ```bash
-    python load_data.py
-    ```
+| Metot | Endpoint                  | Açıklama                                      |
+| :---- | :------------------------ | :-------------------------------------------- |
+| `GET` | `/`                       | API'nin çalıştığını teyit eden hoşgeldin mesajı. |
+| `GET` | `/movies/{movie_id}`      | Verilen ID'ye sahip filmin detaylarını getirir. |
+| `GET` | `/movies/search/`         | Başlığında aranan kelimeyi içeren filmleri listeler. |
+| `...` |                           | *(Eklediğin yeni endpoint'leri buraya ekleyebilirsin)* |
 
 ---
-
 
 
 ### 🔧 Kurulum ve Çalıştırma
