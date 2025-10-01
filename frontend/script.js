@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const API_URL = 'https://film-api-projesi.onrender.com'; // FastAPI sunucunuzun adresi
+    const API_URL = 'https://film-api-projesi.onrender.com/'; // FastAPI sunucunuzun adresi
+
 
     const searchInput = document.getElementById('searchInput');
     const searchButton = document.getElementById('searchButton');
@@ -38,11 +39,15 @@ document.addEventListener('DOMContentLoaded', () => {
             movieCard.className = 'movie-card';
             movieCard.dataset.movieId = movie.id; // Detaylar için ID'yi sakla
 
-            // Afiş görseli için basit bir yer tutucu
-            const posterPath = "https://via.placeholder.com/200x300.png?text=No+Image";
+            let posterHTML = '';
+            // Sadece poster_path varsa resim etiketini oluştur
+            if (movie.poster_path) {
+                const posterUrl = `https://image.tmdb.org/t/p/w200${movie.poster_path}`;
+                posterHTML = `<img src="${posterUrl}" alt="${movie.title}">`;
+            }
             
             movieCard.innerHTML = `
-                <img src="${posterPath}" alt="${movie.title}">
+                ${posterHTML}
                 <h3>${movie.title}</h3>
             `;
             resultsGrid.appendChild(movieCard);
